@@ -1,0 +1,30 @@
+# 2018-10-11 00:15:14
+#---------------------------------------------------#
+## 配置文件需要放置在 $HOME/.config/clash/config.yml
+## 
+## 对于 macOS 用户，如果你不知道如何操作，请将一下命令复制到 终端 （包括最后的 . 符号）并执行：
+## mkdir -p $HOME/.config/clash/ && cd $HOME/.config/clash/ && sudo curl -o ./config.yml https://raw.githubusercontent.com/Hackl0us/SS-Rule-Snippet/master/LAZY_RULES/clash.yml -k -s && sudo chmod 775 ./config.yml && open .
+## 在 Finder 弹出窗口中，打开并编辑 config.yml 即可。
+#---------------------------------------------------#
+
+# HTTP 代理端口
+port: 7890
+
+# SOCKS5 代理端口
+socks-port: 7891
+
+# Linux 和 macOS 的 redir 代理端口
+redir-port: 7892
+
+# 允许局域网的连接（可用来共享代理）
+allow-lan: false
+
+# 规则模式：Rule（规则） / Global（全局代理）/ Direct（全局直连）
+mode: Rule
+
+# 设置日志输出级别 (默认级别：info，级别越高日志输出量越大，越倾向于调试)
+# 四个级别：info / warning / error / debug
+log-level: info
+
+# clash 的 RESTful API
+external-controller: 127.0.0.1:9090
