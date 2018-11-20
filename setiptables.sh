@@ -36,24 +36,24 @@ check_sys(){
 			release="ubuntu"
 		elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 			release="centos"
-	        fi
+			fi
 }
 
 Set_iptables(){
 	check_sys
-	    echo "$release"     
-        if [ ${release} = 'centos' ]; then
-	        systemctl disable firewalld
-            yum install iptables-services iptables -y
-            systemctl enable iptables
+		echo "$release"     
+		if [ ${release} = 'centos' ]; then
+			systemctl disable firewalld
+			yum install iptables-services iptables -y
+			systemctl enable iptables
 		else
 			apt-get install pkg-config build-essential libgnutls28-dev libwrap0-dev liblz4-dev libseccomp-dev libreadline-dev libnl-nf-3-dev libev-dev gnutls-bin -y
 		fi
 
-    /sbin/iptables -P INPUT ACCEPT
-    /sbin/iptables -P OUTPUT ACCEPT
-    /sbin/iptables -F
-    #优化系统配置
+	/sbin/iptables -P INPUT ACCEPT
+	/sbin/iptables -P OUTPUT ACCEPT
+	/sbin/iptables -F
+	#优化系统配置
 	sed -i '/fs.file-max/d' /etc/sysctl.conf
 	sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_syncookies/d' /etc/sysctl.conf

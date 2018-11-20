@@ -131,7 +131,7 @@ startbbrmod(){
 	echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 	echo "net.ipv4.tcp_congestion_control=tsunami" >> /etc/sysctl.conf
 	sysctl -p
-    cd .. && rm -rf bbrmod
+	cd .. && rm -rf bbrmod
 	echo -e "${Info}魔改版BBR启动成功！"
 }
 
@@ -191,8 +191,8 @@ startlotserver(){
 remove_all(){
 	rm -rf bbrmod
 	sed -i '/net.core.default_qdisc/d' /etc/sysctl.conf
-    sed -i '/net.ipv4.tcp_congestion_control/d' /etc/sysctl.conf
-    sed -i '/fs.file-max/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_congestion_control/d' /etc/sysctl.conf
+	sed -i '/fs.file-max/d' /etc/sysctl.conf
 	sed -i '/net.core.rmem_max/d' /etc/sysctl.conf
 	sed -i '/net.core.wmem_max/d' /etc/sysctl.conf
 	sed -i '/net.core.rmem_default/d' /etc/sysctl.conf
@@ -408,22 +408,22 @@ detele_kernel(){
 #更新引导
 BBR_grub(){
 	if [[ "${release}" == "centos" ]]; then
-        if [[ ${version} = "6" ]]; then
-            if [ ! -f "/boot/grub/grub.conf" ]; then
-                echo -e "${Error} /boot/grub/grub.conf 找不到，请检查."
-                exit 1
-            fi
-            sed -i 's/^default=.*/default=0/g' /boot/grub/grub.conf
-        elif [[ ${version} = "7" ]]; then
-            if [ ! -f "/boot/grub2/grub.cfg" ]; then
-                echo -e "${Error} /boot/grub2/grub.cfg 找不到，请检查."
-                exit 1
-            fi
-            grub2-set-default 0
-        fi
-    elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
-        /usr/sbin/update-grub
-    fi
+		if [[ ${version} = "6" ]]; then
+			if [ ! -f "/boot/grub/grub.conf" ]; then
+				echo -e "${Error} /boot/grub/grub.conf 找不到，请检查."
+				exit 1
+			fi
+			sed -i 's/^default=.*/default=0/g' /boot/grub/grub.conf
+		elif [[ ${version} = "7" ]]; then
+			if [ ! -f "/boot/grub2/grub.cfg" ]; then
+				echo -e "${Error} /boot/grub2/grub.cfg 找不到，请检查."
+				exit 1
+			fi
+			grub2-set-default 0
+		fi
+	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
+		/usr/sbin/update-grub
+	fi
 }
 
 #############内核管理组件#############
@@ -448,7 +448,7 @@ check_sys(){
 		release="ubuntu"
 	elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 		release="centos"
-    fi
+	fi
 }
 
 #检查Linux版本
