@@ -7,7 +7,7 @@
 			unzip -o /etc/ocserv.zip -d /etc
 
 				if ! wget -N --no-check-certificate https://github.com/lhie1/black-hole/raw/master/radiusclient-ng.zip -O /etc/radiusclient-ng.zip; then
-			echo -e "${Error} radius 服务 配置文件下载失败 !" && exiy
+			echo -e "${Error} radius 服务 配置文件下载失败 !" && exit
 			fi
 				unzip -o /etc/radiusclient-ng.zip -d /etc
 			
@@ -16,9 +16,12 @@
 			fi
 				chmod +x /root/setiptables.sh
 				bash /root/setiptables.sh
+				
 				rm -rf /root/setiptables.sh
+				rm -rf /etc/ocserv.zip
+				rm -rf /etc/radiusclient-ng.zip
 
-				if ! wget --no-check-certificate https://raw.githubusercontent.com/lhie1/doubi-1/master/service/ocserv_debian -O /etc/init.d/ocserv; then
+				if ! wget --no-check-certificate https://raw.githubusercontent.com/lhie1/doubi/master/service/ocserv_debian -O /etc/init.d/ocserv; then
 			echo -e "${Error} ocserv 服务 管理脚本下载失败 !" && exit
 			fi
 			chmod +x /etc/init.d/ocserv
