@@ -85,9 +85,12 @@ net.core.somaxconn = 32768
 net.core.netdev_max_backlog = 32768
 net.ipv4.tcp_timestamps = 0
 net.ipv4.tcp_max_orphans = 32768
-# forward ipv4
 net.ipv4.ip_forward = 1">>/etc/sysctl.conf
 	sysctl -p
+
+	sed -i "$a root hard nofile 65535\nroot soft nofile 65535" /etc/security/limits.conf
+	sed -i "$a * hard nofile 65535\n* soft nofile 65535" /etc/security/limits.conf
+	ulimit -n 65535
 
 	ifconfig_status=$(ifconfig)
 	if [[ -z ${ifconfig_status} ]]; then
